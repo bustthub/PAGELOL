@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script >
+ //obj是目标对象  target目标到达位置  times是速度 callback回调函数
+function animate(obj, target, callback) {
+    clearInterval(obj.timer)
+    obj.timer = setInterval(function () {
+        var step = (target - obj.offsetLeft);
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        if (obj.offsetLeft == target) {
+            clearInterval(obj.timer)
+            if (callback) {
+                callback();
+            }
+        }
+        obj.style.left = obj.offsetLeft + step +"px"
+    }, 15)
+}
+window.onload = function () {
+    /* logo */
+    var pic = document.querySelector(".pic")
+    var Ver = document.querySelector(".top-act-Ver")
+    var link = document.querySelector(".top-act-link")
+    var yxgx = document.querySelector("yxgx")
+    var rightnav=document.querySelector(".rightnav-barshow")
+    var rightnavlis=rightnav.querySelectorAll("li")
+    document.addEventListener("scroll", function () {
+        if(window.scrollY>555){
+            rightnav.style.height=420+"px"
+        }
+        else{
+            rightnav.style.height=350+"px"
+        }
+        if (window.scrollY > 380) {
+            yxgx.style.opacity = "1";
+        }
+        pic.style.height = 360 + "px"
+        link.style.top = 285 + "px"
+        Ver.style.top = 295 + "px"
+        pic.style.backgroundImage = "url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_083548381f778beddde32f16e75d9334/0)"
+    })
+
+    var big = document.querySelector(".img")
+    var div = big.querySelector("div")
+    var imgs = big.querySelectorAll("img")
+    var lis = big.querySelectorAll("li")
+    console.log(lis[1]);
+    for (i = 0; i < lis.length; i++) {
+        lis[i].index = i
+        lis[i].addEventListener("mouseenter", function () {
+            var index = this.index
+            animate(div, -index * 820)
+        })
+        lis[i].addEventListener("mouseover", function () {
+            console.log("点击");
+            for (z = 0; z < lis.length; z++) {
+                lis[z].className = "imgul1"
+            }
+            this.className = "imgul"
+        })
+        lis[0].className = "imgul"
+        console.log(lis[i].index);
+        let fle = 1;
+        setInterval(function () {
+            div.style.left = -fle * 820 + "px"
+            for (z = 0; z < lis.length; z++) {
+                lis[z].className = "imgul1"
+            }
+            lis[fle].className = "imgul"
+            if (fle == 4) {
+                fle = -1
+            }
+            fle++;
+        }, 3000)
+    }
+    var dianjiimg = document.querySelector(".dianji")
+    var yxgx = document.querySelector(".yxgx")
+    var yxgxyc = yxgx.querySelector(".yxgx-yc")
+    dianjiimg.addEventListener("mouseover", function () {
+        yxgx.style.height = 500 + "px"
+        yxgxyc.style.height = 170 + "px";
+        dianjiimg.style.transform = "scale(1.1)"
+    })
+    yxgxyc.addEventListener("mouseover", function () {
+        yxgx.style.height = 500 + "px"
+        yxgxyc.style.height = 170 + "px";
+    })
+    dianjiimg.addEventListener("mouseout", function () {
+        yxgx.style.height = 350 + "px"
+        yxgxyc.style.height = 0 + "px";
+        dianjiimg.style.transform = "scale(1.0)"
+    })
+
+    yxgxyc.addEventListener("mouseout", function () {
+        yxgxyc.style.height = 0 + "px";
+        yxgx.style.height = 350 + "px"
+    })
+
+
+
+    var btnleft = document.querySelector(".btn-left")
+    var btnright = document.querySelector(".btn-right")
+    var upul = document.querySelector(".sszx-top-up-ul")
+    btnleft.addEventListener("click", function () {
+        animate(upul, 0)
+    })
+    btnright.addEventListener("click", function () {
+        animate(upul, -1536)
+    })
+    var rmhd = document.querySelector(".rmhd-left-bottom")
+    var rmhdlis = rmhd.querySelectorAll("li")
+    for (i = 0; i < rmhdlis.length; i++) {
+        rmhdlis[i].addEventListener("mouseover", function () {
+            this.style.marginTop = 15 + "px";
+            this.style.transition = "all 0.5s ease-out 0s";
+        })
+        rmhdlis[i].addEventListener("mouseout", function () {
+            this.style.marginTop = 20 + "px";
+        })
+    }
+    var sszxul = document.querySelector(".sszx-top-up-ul")/* 鼠标托转效果 */
+    sszxul.addEventListener("mousedown", function (e) {
+        var x = e.pageX - sszxul.offsetLeft;//点击位置的X坐标减去窗口距离元素的X坐标,得到点击位置距离元素的X坐标
+        var y = e.pageY - sszxul.offsetTop;
+        console.log(y);
+        document.addEventListener("mousemove", move)
+        function move(e) {
+            var on = e.pageX - x;
+            if (on >= 0) {
+                on = 0
+            }
+            if (on <= -1536) {
+                on = -1536
+            }
+            sszxul.style.left = on + "px"
+        }
+        document.addEventListener("mouseup", function () {
+            document.removeEventListener("mousemove", move)
+        })
+    })
+
+  
+    rightnavlis[5].addEventListener("click",function(){
+        window.scroll(0,0)
+        window.style.transition="all 0.25s"
+    })
+}
+
+</script>
+   
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0 auto;
+    width: 1920px;
+    height: auto;
+    position: relative;
+    font-family: "微软雅黑";
+    -moz-user-select: none;
+    /*火狐*/
+    /*选中文字时避免出现蓝色背景*/
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    /*选中文字时避免出现蓝色背景*/
+    -ms-user-select: none;
+    /*IE10*/
+    /*选中文字时避免出现蓝色背景*/
+    user-select: none;
+    /*选中文字时避免出现蓝色背景*/
+}
+
+
+/* logo栏 */
+.pic {
+    width: 100%;
+    height: 720px;
+    background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_7822b7d04bfbfa296acceaa0336cc3dd/0
+);
+    background-size: cover;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.logo {
+    width: 100%;
+    height: 131px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #aeaeae6c;
+    background: url(https://game.gtimg.cn/images/lol/v3/dark-jianbian-repeatx-0.png) no-repeat center top;
+    background-size: 100% 131px;
+}
+
+.LOLlogo {
+    float: left;
+    margin-left: 300px;
+}
+
+.logo-ul {
+    float: left;
+    margin-top: 10px;
+}
+
+.logo ul {
+    list-style: none;
+    text-align: center;
+    float: left;
+    margin-top: 10px;
+}
+
+.logo ul li {
+    float: left;
+    width: 137px;
+    height: 60px;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.logo ul li p {
+    color: #aeaeae;
+    font-size: 11px;
+    margin-top: -1px;
+    letter-spacing: 1px
+}
+
+.comm-icon-search {
+    margin-left: 120px;
+    margin-top: 30px;
+    float: left;
+    background-position: -381px -39px;
+    width: 21px;
+    height: 21px;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/topfoot-spr.png);
+    background-repeat: no-repeat;
+
+}
+
+.comm-icon-phone {
+    margin-left: 35px;
+    margin-top: 30px;
+    background-position: -303px -84px;
+    width: 16px;
+    height: 24px;
+    float: left;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/topfoot-spr.png);
+    background-repeat: no-repeat;
+}
+
+.top-act-link {
+    position: absolute;
+    left: 45%;
+    top: 600px;
+    background-position: -216px -39px;
+    width: 160px;
+    height: 40px;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/topfoot-spr.png);
+    background-size: 405px 178px;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+}
+
+.comm-icon-onlogin {
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 10px;
+    background-image: url(yonghu.png);
+    background-size: cover;
+}
+
+.comm-icon-text {
+    color: #fefefe;
+    font-size: 20px;
+    line-height: 70px;
+    font-family: "微软雅黑";
+    margin-top: 10px;
+}
+
+.comm-icon-text a {
+    color: #fff3d0;
+    text-decoration: none;
+}
+
+.top-act-Ver {
+    font-size: 16px;
+    color: #888787;
+    position: absolute;
+    right: 15%;
+    top: 665px;
+    font-family: "微软雅黑";
+    transition: all 0.5s;
+}
+
+.top-act-Ver-img {
+    margin-left: 10px;
+    background-repeat: no-repeat;
+    float: right;
+    width: 82px;
+    height: 26px;
+    background-image: url(bbxx.png);
+    background-size: 82px 26px;
+}
+
+.top-act-Ver span {
+    color: #f5d185;
+}
+
+/* logo end  */
+
+/* oncenter */
+.oncenter {
+    background-color: #eeeeee;
+    width: 100%;
+    height: 460px;
+}
+
+.img {
+    width: 820px;
+    height: 380px;
+    background-color: #e3e2e2;
+    position: relative;
+    overflow: hidden;
+    float: left;
+    margin-left: 200px;
+    margin-top: 40px
+}
+
+.img img {
+    margin: 0 auto;
+    padding: 0;
+    float: left;
+}
+
+.img div {
+    width: 4130px;
+    background-image: none;
+    transition: all 1s;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.img ul {
+    list-style: none;
+    position: absolute;
+    top: 340px;
+    left: 0;
+}
+
+.imgul1 {
+    text-align: center;
+    float: left;
+    line-height: 36px;
+    width: 163px;
+    height: 40px;
+    font-size: 15px;
+    color: #565656;
+}
+
+.oncenter-left {
+    width: 650px;
+    float: right;
+    height: 380px;
+    margin-top: 40px;
+    margin-right: 210px;
+}
+
+.oncenter-left-firstul li {
+    float: left;
+    width: 125px;
+    height: 30px;
+    text-align: center;
+    color: #676767;
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-family: "微软雅黑";
+    font-weight: 500;
+}
+
+.oncenter-left-twoul-first {
+    width: 100%;
+    height: 75px;
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #e0e2e2;
+    border-bottom: none;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/index-spr.png);
+    background-size: 100% 585px;
+    background-repeat: no-repeat;
+    background-position: 0 -458px;
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #0da0b4;
+    line-height: 68px;
+}
+
+.oncenter-left-twoul-first:hover {
+    color: #BB9a6c;
+}
+
+.oncenter-left-twoul-two {
+    width: 100%;
+    height: 35px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #e0e2e2;
+    border-bottom: none;
+
+}
+
+.spanone {
+    margin-top: 7px;
+    text-align: center;
+    float: left;
+    size: 15px;
+    color: #0da0b4;
+    /* width: 35px;
+    height: 25px; */
+    border: 1px solid #0da0b4;
+}
+
+.spantwo {
+    float: left;
+    size: 15px;
+    line-height: 35px;
+    color: #777777;
+    padding-left: 25px;
+}
+
+.spantwo:hover {
+    color: #0da0b4;
+}
+
+.span3 {
+    float: right;
+    size: 15px;
+    line-height: 35px;
+    color: #777777;
+}
+
+.oncenter-bottmo {
+    width: 100%;
+    height: 31px;
+    background-color: #e3e2e2;
+    text-align: center;
+    float: left;
+    font-size: 14px;
+    color: #676767;
+    line-height: 31px;
+}
+
+.imgul {
+    color: #ab8e66;
+    background-color: #f7f6f6;
+    border-bottom: px #cea861 solid;
+    text-align: center;
+    float: left;
+    line-height: 36px;
+    width: 163px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.rightnav-barshow {
+    width: 90px;
+    height: 350px;
+    background-color: white;
+    position: absolute;
+    top: 400px;
+    position: fixed;
+    border-radius: 0px 10px 10px 0px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.rightnav-barshow li {
+    height: 70px;
+    width: 100%;
+    margin-bottom: 1px;
+    transition: all 0.3s cubic-bezier(0.72, 0.28, 1, 1);
+    overflow: hidden;
+}
+.rightnav-barshow li span{
+    float: left;
+    width: 18px;
+    height: 22px;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/comm-spr.png);
+    background-size: 393px 200px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-left: 35px;
+}
+.rightnav-barshow li p{
+    float: left;
+    padding-left: 15px;
+    padding-top: 5px;
+    font-family:"微软雅黑";
+    color: #309cac;
+}
+.rmhd {
+    background-color: #eeeeee;
+    width: 100%;
+    height: 380px;
+    position: relative;
+}
+
+.rmhd-left {
+    margin-left: 200px;
+    width: 43%;
+    height: 350px;
+}
+
+.rmhd-left-top {
+    float: left;
+    width: 100%;
+    height: 40px;
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+
+.rmhd-left-top span {
+    float: left;
+    font-size: 16px;
+    margin-left: 45px;
+    text-align: center;
+    line-height: 40px;
+    color: #676767;
+    letter-spacing: 1px;
+}
+
+.rmhd-left-top a {
+    float: left;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.rmhd-left-bottom {
+    float: left;
+    width: 100%;
+    height: 340px;
+}
+
+.rmhd-left-bottom ul {
+    list-style: none;
+}
+
+.rmhd-left-bottom li {
+    float: left;
+    width: 24%;
+    height: 310px;
+    margin-top: 20px;
+    margin-right: 1%;
+    background-color: white;
+}
+
+.rmhd-right {
+    float: right;
+    width: 34%;
+    height: 370px;
+    position: absolute;
+    right: 205px;
+    top: 0px;
+}
+
+.rmhd-right-span {
+    float: left;
+
+    width: 175px;
+    height: 90px;
+}
+
+.rmhd-right div {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    height: 75px;
+
+}
+
+.rmhd-right div ul {
+    list-style: none;
+}
+
+.rmhd-right div li {
+    width: 157px;
+    height: 75px;
+    float: left;
+    margin-right: 4px;
+    background-color: white;
+}
+
+.li-span1 {
+    float: left;
+    margin-left: 35px;
+    margin-top: 30px;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/comm-spr.png);
+    background-size: 393px 200px;
+    background-repeat: no-repeat;
+}
+.yxgx {
+    width: 100%;
+    height: 350px;
+    background-color: #eeeeee;
+    float: left;
+    position: relative;
+    transition: all 0.5s;
+    opacity: 0.5;
+}
+
+.yxgx-left {
+    width: 820px;
+    height: 254px;
+    margin-top: 30px;
+    margin-left: 200px;
+    float: left;
+}
+
+.yxgx-right {
+    width: 600px;
+    height: 254px;
+    /*   position: absolute;
+    right: 200px;
+    top: 30px; */
+    float: left;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.yxgx-right-div1 {
+    float: left;
+    width: 270px;
+    height: 120px;
+    background-color: #eeeeee;
+    background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_391805bf5104e42aae5cdc27a2f57498/0);
+    background-size: 100%;
+}
+
+.yxgx-right-div2 {
+    float: right;
+    width: 300px;
+    height: 255px;
+    background-color: blanchedalmond;
+    background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_c218eab6d7d6e52809a8e3f294dc5b35/0);
+    background-size: 100% 100%;
+}
+
+.yxgx-right-div3 {
+    /*   left: 0;
+    bottom: 0; */
+    width: 270px;
+    margin-top: 15px;
+    float: left;
+    height: 120px;
+    background-color: azure;
+    /* position: absolute; */
+    background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_a363944cdcae09cf08ea4be8a6bb3948/0);
+    background-size: 100%;
+
+}
+
+/* .yxgx-right-div4{
+    width: 238px;
+    float: right;
+    height: 50px;
+    margin-top: 25px;
+    background-color: rgb(59, 183, 183);
+
+    background-image: url(https://game.gtimg.cn/images/lol/v3/index-spr.png);
+    background-size: 638px 572px;
+    background-repeat: no-repeat;
+    background-position: -193px -253px;
+    text-align: center;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+} */
+.yxgx-yc {
+    width: 100%;
+    height: 0px;
+    float: left;
+    transition: all 0.25s;
+    overflow: hidden;
+}
+
+.yxgx-yc ul {
+    list-style: none;
+    float: left;
+    width: 78%;
+    height: 120px;
+    margin-left: 200px;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.yxgx-yc ul li {
+    width: 13.5%;
+    height: 100%;
+    float: left;
+    margin-right: 10px;
+    background-color: antiquewhite;
+}
+
+.yxgx-yc ul li:hover {
+    transform: scale(1.1);
+    transition: all 0.25s;
+}
+
+.yxgx-yc ul li span {
+    width: 100%;
+    height: 20%;
+    float: left;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.587);
+    color: #bb9a6c;
+    font-family: "微软雅黑";
+}
+
+
+.sszx {
+    width: 100%;
+    height: 700px;
+    background-color: #e3e2e2;
+    float: left;
+    position: relative;
+}
+
+.sszx-top {
+    width: 80%;
+    height: 280px;
+    margin-left: 195px;
+    float: left;
+    margin-top: 50px;
+}
+
+.sszx-top-on span {
+    width: 150px;
+    height: 50px;
+    float: left;
+    margin-top: 0px;
+    color: black;
+    font-size: 30px;
+}
+
+.sszx-top-on li {
+    float: left;
+    color: #e3e2e2;
+    font-size: 24px;
+    margin-right: 40px;
+}
+
+.sszx-top-on ul a {
+    float: right;
+    color: #606060;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 50px;
+    padding-right: 20px;
+    text-decoration: none;
+}
+
+.sszx-top-up {
+    float: left;
+    width: 1536px;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sszx-top-up ul {
+    height: 100%;
+    width: 3072px;
+    list-style: none;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: absolute;
+    cursor: grab;
+    left: 0px;
+    top: 0;
+    transition: all 0.5s;
+}
+
+.sszx-top-up ul li {
+    flex: 1;
+    margin-right: 20px;
+    position: relative;
+    background-color: white;
+}
+
+.sszx-top-up-span1 {
+    width: 85px;
+    height: 100px;
+    pointer-events: none;
+    position: absolute;
+    left: 15px;
+    top: 50px;
+}
+
+.sszx-top-up-span2 {
+    width: 85px;
+    height: 100px;
+    pointer-events: none;
+    position: absolute;
+    right: 0px;
+    top: 50px;
+}
+
+.sszx-top-up-span3 {
+    color: #000;
+    font-weight: 600;
+    font-size: 50px;
+    position: absolute;
+    right: 100px;
+    top: 60px;
+}
+
+.sszx-top-up-span4 {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    color: #bb9a6c;
+    border: 1px solid #bb9a6c;
+    font-size: 10px;
+    position: absolute;
+    right: 110px;
+    top: 130px;
+    text-align: center;
+}
+
+.sszx-top-up-span5 {
+    text-align: center;
+    color: #000;
+    font-weight: 600;
+    font-size: 10px;
+    position: absolute;
+    right: 70px;
+    top: 180px;
+}
+.btn-left {
+    background-image: url(https://game.gtimg.cn/images/lol/v3/index-spr.png);
+    background-size: 638px 572px;
+    background-repeat: no-repeat;
+    background-position: -221px -397px;
+    width: 23px;
+    height: 51px;
+    position: absolute;
+    left: 160px;
+    top: 190px;
+}
+
+.btn-right {
+    background-image: url(https://game.gtimg.cn/images/lol/v3/index-spr.png);
+    background-size: 638px 572px;
+    background-repeat: no-repeat;
+    background-position: -193px -397px;
+    width: 23px;
+    height: 51px;
+    position: absolute;
+    right: 170px;
+    top: 190px;
+}
+
+
+
+
+.sszx-bottom {
+    width: 80%;
+    height: 300px;
+    margin-left: 195px;
+    float: left;
+    margin-top: 0px;
+}
+
+.sszx-bottom-left {
+    width: 930px;
+    height: 300px;
+    float: left;
+}
+
+.sszx-bottom-left p {
+    width: 100%;
+    height: 30px;
+    float: left;
+    color: #000;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sszx-bottom-left ul li {
+    width: 165px;
+    height: 250px;
+    margin-right: 20px;
+    background-color: white;
+    float: left;
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+}
+
+.sszx-bottom-left ul li div {
+    width: 165px;
+    height: 180px;
+    margin-right: 20px;
+    background: -webkit-linear-gradient(top, #fefefe, #fefefe, #8a8a8a);
+    float: left;
+    margin-bottom: 20px;
+}
+
+.div-img1 {
+    position: absolute;
+    top: 15px;
+    ;
+    right: 0;
+}
+
+.div-img2 {
+    position: absolute;
+    top: 10px;
+    ;
+    left: 15px;
+    background-image: url(https://ossweb-img.qq.com/images/lol/v3/icon-role.png);
+    background-size: 70px 45px;
+    background-repeat: no-repeat;
+    background-position: -52px 0;
+    width: 18px;
+    height: 18px;
+}
+
+.div-img3 {
+    position: absolute;
+    top: 5px;
+    ;
+    right: 10px;
+    background-image: url(https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0);
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+}
+
+.sszx-bottom-right {
+    width: 590px;
+    float: left;
+    height: 300px;
+}
+
+.sszx-bottom-right p {
+    width: 100%;
+    height: 30px;
+    float: left;
+    color: #000;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sszx-bottom-right-div {
+    width: 100%;
+    height: 30px;
+    float: left;
+    background-color: #959595;
+    line-height: 30px;
+    font-size: 24px;
+}
+
+.sszx-bottom-right ul {
+    width: 100%;
+    height: 220px;
+    overflow: scroll;
+    background-color: rgb(0, 196, 196);
+}
+
+.sszx-bottom-right ul li {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid rgba(86, 119, 121, 0.781);
+    background-color: rgb(255, 255, 255);
+}
+
+.sszx-bottom-rightspan1 {
+    float: left;
+    width: 44px;
+    height: 46px;
+    text-align: center;
+    font-family: "隶书";
+    font-size: 36px;
+    color: #7b7b7b;
+    margin-left: 12px;
+}
+
+.sszx-bottom-rightspan2 {
+    float: left;
+    width: 44px;
+    height: 46px;
+    margin-left: 60px;
+}
+
+.sszx-bottom-rightspan5 {
+    float: left;
+    text-align: center;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    color: #000000;
+    margin-left: 5px;
+    line-height: 46px;
+}
+
+.sszx-bottom-rightspan3 {
+    float: left;
+    text-align: center;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    color: #5f8d94;
+    margin-left: 120px;
+    line-height: 46px;
+}
+
+.sszx-bottom-rightspan4 {
+    float: left;
+    text-align: center;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    color: #5f8d94;
+    margin-left: 130px;
+    line-height: 46px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 100%;
+    background-color: #e3e2e2;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 20px;
+    height: 10px;
+    background-color: #abc0c3;
+}
+
+
+.czg {
+    width: 100%;
+    height: 580px;
+    background-color: #eeeeee;
+    float: left;
+}
+
+.czg-left {
+    width: 930px;
+    height: 500px;
+    float: left;
+    margin-left: 195px;
+    margin-top: 50px;
+}
+
+.czg-left p {
+    width: 930px;
+    height: 40px;
+    float: left;
+    color: #000;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.czg-left div {
+    width: 210px;
+    height: 200px;
+    float: left;
+    margin-right: 20px;
+    background-color: cornsilk;
+    margin-bottom: 20px;
+    overflow: hidden;
+
+}
+
+.czg-left div img {
+    transition: all 1s cubic-bezier(0.8, 0.1, 0.2, 0.9);
+}
+
+.czg-left div img:hover {
+    transform: scale(1.3);
+    transition: all 1s cubic-bezier(0.8, 0.1, 0.2, 0.9);
+}
+
+.czg-right {
+    width: 590px;
+    height: 480px;
+    margin-top: 50px;
+    float: left;
+}
+
+.czg-right-div1 {
+    width: 280px;
+    height: 460px;
+    float: left;
+    background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_7e07da80a032062cd298cf843b8771ad/0);
+    background-size: cover;
+}
+
+.czg-right-div2 {
+    width: 290px;
+    height: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: left;
+    background-image: url(https://ossweb-img.qq.com/images/lol/v3/href-bg-2.jpg);
+    background-size: cover;
+}
+
+.rmhd-right li:hover {
+    border-radius: 4px;
+    box-shadow: 0 0 10px #ccc;
+    transition: all 0.25s;
+}
+
+.czg-right-div3 {
+    width: 290px;
+    height: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: left;
+    background-color: #bb9a6c;
+    background-image: url(box2.png);
+    background-size: 100% 100%;
+}
+
+.lastfoot {
+    width: 100%;
+    height: 250px;
+    background-color: #e3e2e2;
+    float: left;
+}
+
+.lastfoot-left {
+    float: left;
+    width: 400px;
+    height: 100px;
+    margin-top: 70px;
+    margin-left: 220px;
+}
+
+.lastfoot-left-span1 {
+    float: left;
+    background-position: -216px 0;
+    width: 189px;
+    height: 34px;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/topfoot-spr.png);
+    background-size: 405px 178px;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+}
+
+.lastfoot-left-span2 {
+    float: left;
+    background-image: url(https://game.gtimg.cn/images/lol/v3/logo-rigo.png);
+    background-size: 98px 28px;
+    background-position: 0px 0px;
+    width: 98px;
+    height: 28px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.lastfoot-ul{
+    list-style: none;
+    width: 44%;
+    float: left;
+    height: 150px;
+    color: #9f9378;
+    margin-top: 55px;
+    margin-left: 230px;
+    font-size: 12px;
+}
+.lastfoot-ul li{
+    float: left;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    color: #9f9378;
+    font-size: 12px;
+    float: left;
+}
+
+
+</style>
+<body οndragstart="return false">
+    <!-- logo栏 -->
+    <div class="pic"> </div><!-- photo -->
+    <div class="top-act-link"></div><!-- 查看详细 -->
+    <div class="top-act-Ver">当前游戏版本：<span>Ver 12.11</span>
+        <div class="top-act-Ver-img"></div>
+    </div>
+    <div class="logo">
+        <img src=https://game.gtimg.cn/images/lol/v3/logo-public.png width="167px" height="60px" alt="英雄联盟"
+            style="margin-top:10px ;" class="LOLlogo">
+        <div class="logo-ul">
+            <ul style="margin-top:10px ;">
+                <li>游戏资料<p>GAME INFP</p>
+                </li>
+                <li>商场/合作<p>STORE</p>
+                </li>
+                <li>社区互动<p>COMMUNITY</p>
+                </li>
+                <li>官方赛事<p>ESPORTS</p>
+                </li>
+                <li>自助系统<p>SYSTEM</p>
+                </li>
+            </ul>
+        </div>
+        <div class="comm-icon-search"></div><!-- //搜索组件 -->
+        <div class="comm-icon-phone"> </div><!-- //手机组件 -->
+        <div class="comm-icon-onlogin"></div>
+        <div class="comm-icon-text">亲爱的召唤师，欢迎<a href="javascript:;">登录</span></div>
+    </div>
+    <!-- logo end -->
+    <!-- 中上-->
+    <div class="oncenter">
+        <div class="img">
+            <div>
+                <img src="img0.jpeg" alt="">
+                <img src="img1.jpeg" alt="">
+                <img src="img2.jpeg" alt="">
+                <img src="img3.jpeg" alt="">
+                <img src="img4.jpeg" alt="">
+            </div>
+            <ul>
+                <li class="imgul1">夏之乐章宝典</li>
+                <li class="imgul1">云顶之弈第七赛季</li>
+                <li class="imgul1">云顶宝典 巨龙宝藏</li>
+                <li class="imgul1">2022西部秘宝</li>
+                <li class="imgul1" style="width:168px ;">巨龙之境 探索龙之密岛</li>
+            </ul>
+        </div>
+        <div class="oncenter-left">
+            <ul style="list-style: none; float: left; width: 100%;height: 50px;" class="oncenter-left-firstul">
+                <li>综合</li>
+                <li>公告</li>
+                <li>赛事</li>
+                <li>攻略</li>
+                <li>社区</li>
+            </ul>
+
+            <ul style="list-style: none; float: left; width: 100%;height: 300px;" class="oncenter-left-twoul">
+                <li class="oncenter-left-twoul-first">【英雄联盟】新英雄尼菈CG</li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span
+                        class="spantwo">云顶之弈Set7中韩主播表演赛即将开战!</span><span class="span3">06-20</span></li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span
+                        class="spantwo">巨龙之战”云顶之弈第七赛季主播冲分活动第一阶段赛果</span><span class="span3">06-20</span></li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span
+                        class="spantwo">教你一招：5分钟教你玩会新英雄虚空女皇卑尔维斯</span><span class="span3">06-20</span></li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span
+                        class="spantwo">【12.11】世界之敌虚空女皇登场！鬼书数值加的太多啦</span><span class="span3">06-20</span></li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span
+                        class="spantwo">版本研究所12.11：坦克装全面加强，大小重伤再度削弱！</span><span class="span3">06-20</span></li>
+                <li class="oncenter-left-twoul-two"><span class="spanone">新闻</span><span class="spantwo">版本答案：打野悟空 大闹天空
+                        横扫野区 做回自己</span><span class="span3">06-20</span></li>
+            </ul>
+            <div class="oncenter-bottmo">阅读更多<span style="color: #7ea1a6;">最新资讯→</span></div>
+        </div>
+    </div>
+    <!-- 中上end -->
+    <!-- 热门活动 -->
+    <div class="rmhd">
+        <!-- 热门活动 -->
+        <div class="rmhd-left">
+            <div class="rmhd-left-top">
+                <a href="javascrpit:;">热门活动</a>
+                <span style="font-size:20px;">正在进行</span>
+                <span>商品特惠</span>
+                <span>长期活动</span>
+                <span style="float: right;font-size: 12px;
+                color: #7ea1a6;">更多→</span>
+            </div>
+            <div class="rmhd-left-bottom">
+                <ul>
+                    <li>
+                        <img src="	https://ossweb-img.qq.com/images/clientpop/act/lol_1654746824_uploadnewsImg.jpg"
+                            width="100%">
+                        <p style="font-size:14px;padding-left: 10px;color: #777777; ">小小英雄：巨龙幼仔来袭</p>
+                        <br><br>
+                        <span style="font-size:12px;padding-left: 10px;color: #29bdbd; ">长期活动</span>
+                    </li>
+                    <li>
+                        <img src="https://ossweb-img.qq.com/images/clientpop/act/lol_1652409299_uploadnewsImg.jpg"
+                            width="100%">
+                        <p style="font-size:14px;padding-left: 10px;color: #777777; ">破败之王 羽饰骑士礼包</p>
+                        <br><br>
+                        <span style="font-size:12px;padding-left: 10px;color: #29bdbd; ">长期活动</span>
+                    </li>
+                    <li>
+                        <img src="https://ossweb-img.qq.com/images/clientpop/act/lol_1649297305_uploadnewsImg.jpg"
+                            width="100%">
+                        <p style="font-size:14px;padding-left:10px;color: #777777; ">至臻礼赠</p>
+                        <br><br>
+                        <span style="font-size:12px;padding-left: 10px;color: #29bdbd; ">长期活动</span>
+                    </li>
+                    <li>
+                        <img src="https://ossweb-img.qq.com/images/clientpop/act/lol_1645085090_uploadnewsImg.jpg"
+                            width="100%">
+                        <p style="font-size:14px;padding-left:10px;color: #777777; ">海克斯角斗场 棋盘</p>
+                        <br><br>
+                        <span style="font-size:12px;padding-left:10px;color: #29bdbd; ">长期活动</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="rmhd-right">
+            <span class="rmhd-right-span"
+                style="width: 455px;height: 200px; margin-right: 10px; background-image: url(right03.png);background-size: 100%;"></span>
+            <span class="rmhd-right-span"
+                style=" background-image: url(right04.png);background-size: 100% 92px;"></span>
+            <span class="rmhd-right-span"
+                style="margin-top: 20px; background-image: url(right05.png);background-size: 100% 92px;"></span>
+            <div>
+                <ul>
+                    <li><span class="li-span1" style="background-position:-316px -12px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">在线客服</span></li>
+                    <li><span class="li-span1" style="background-position: -219px -72px;;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">秩序殿堂</span></li>
+                    <li><span class="li-span1" style="background-position: -343px -12px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">游戏资料</span></li>
+                    <li><span class="li-span1" style="background-position: -193px -72px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">峡谷之巅</span></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+
+                    <li><span class="li-span1" style="background-position: -280px -125px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">云顶之弈</span></li>
+                    <li><span class="li-span1" style="background-position: -371px -12px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">攻略中心</span></li>
+                    <li><span class="li-span1" style="background-position: -274px -46px;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">LOL宇宙</span></li>
+                    <li><span class="li-span1" style="background-position:-193px -46px ;width: 22px;
+                        height: 20px;"></span><span
+                            style="line-height:80px;font-size: 18px;padding-left: 5px;">微信绑定</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 英雄更新模块 -->
+    <div class="yxgx">
+        <div class="yxgx-left">
+            <img src="https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_ce8d1415feb4e312d150cfdbf53850e8/0"
+                alt="" style="margin-right: 16px;float: left;">
+            <img src="	https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_acd7f0505fc640af233fdd30890f9611/0"
+                alt="" style="margin-left: 0px;float: left;transition: all 0.5s;" class="dianji">
+        </div>
+        <div class="yxgx-right">
+            <div class="yxgx-right-div1"></div>
+            <div class="yxgx-right-div2"></div>
+            <div class="yxgx-right-div3"> </div>
+        </div>
+        <!--  隐藏部分 -->
+        <div class="yxgx-yc">
+            <ul>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_4ed85463beeffcaf0f6df406078fd7e5/0) ; background-size: 100%;">
+                    <span>西部魔影 二度冲击</span>
+                </li>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_bfcfd557f871526e354929858857f846/0) ; background-size: 100%;">
+                    <span>EDG战队冠军皮肤</span>
+                </li>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_878ef56d4b0f8b731ad1725746909f6b/0) ; background-size: 100%;">
+                    <span>天使蚀日 双蚀归来！</span>
+                </li>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_f0648383c5fb5e04925e6b750af8be07/0) ; background-size: 100%;">
+                    <span>命运轮转 以占自然</span>
+                </li>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_8d80aed03e9eabb76d80242b7c0b223a/0) ; background-size: 100%;">
+                    <span>可爱当作武器 双耳即是正义</span>
+                </li>
+                <li
+                    style="background-image: url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_9f99816891aae7e75e7779efb35ebdd0/0); background-size: 100%;">
+                    <span>春风得意 甜蜜出击</span>
+                </li>
+                <li
+                    style="background-image:url(https://img.crawler.qq.com/lolwebschool/0/JAutoCMS_LOLWeb_aa98832c3c35a03428252d3d701499dc/0) ; background-size: 100%;">
+                    <span>护世影刃 华丽参上</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 英雄更新版权end -->
+
+
+
+
+    <!-- 赛事中心 -->
+    <div class="sszx">
+        <div class="sszx-top" style="margin-bottom:20px ;">
+            <div class="sszx-top-on">
+                <span>赛事中心</span>
+                <ul style="float: left;list-style: none; width: 1380px;height: 40px;border-bottom: 1px solid #e0e2e2;">
+                    <li>春季赛常规</li>
+                    <li>春季赛季后赛</li>
+                    <li>夏季赛常规</li>
+                    <a href="javascript:;">2022LPL夏季赛</a>
+                </ul>
+            </div>
+            <div class="sszx-top-up">
+                <!-- 很长很长 -->
+                <ul class="sszx-top-up-ul">
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="	https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0 "
+                                width="70px">
+                            北京JDG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20210524114101/24043b0a56e4e968c97ef99b19c5aa25/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            UP
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20210106161237/bafc101b6a9064be21b83d50b149bb37/0 "
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp;
+                            OMG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20190523092402/2810b9519c64ef7cbcdb9a6cb981798d/0
+                            " width="70px">
+                        
+                            苏州LNG
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20220111170546/5d36c68ec9792a12a0277c25fe55d27c/0 "
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp;
+                            RA
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20220113105125/346f1ca70c2186e817f3f8289738c675/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            WBG
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20211201181243/86ccfa5cb6bacb23b7f8248f9e698d2c/0
+                            " width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            FPX
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20211201183732/9d8f5bd780c2c16e32fefd0d63cfc3b7/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            TES
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="	https://img.crawler.qq.com/lolwebvideo/20181224214105/448aac8501e04a27db7594cb1f441c17/0"
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp;&nbsp;
+                            V5
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="	https://img.crawler.qq.com/lolwebvideo/20180925105909/296e9851a4a4ad7d170a6b103006d045/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            RNG
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="	https://img.crawler.qq.com/lolwebvideo/20211201181118/7edf430cd0137fcc2285bb582ef98dc7/0 "
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp;
+                            EDG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20220424111405/25f3055a060930dd45b7bf1bbe7349e6/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            BLG
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20210106161237/bafc101b6a9064be21b83d50b149bb37/0"
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp;
+                            OMG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20210109181904/0d8c3963b36b2516ccf669b34a3bfc23/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            LGD
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="	https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0 "
+                                width="70px">
+                            北京JDG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20210109181904/0d8c3963b36b2516ccf669b34a3bfc23/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            TT
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20181224214105/448aac8501e04a27db7594cb1f441c17/0
+                            "
+                                width="70px">
+                                &nbsp; &nbsp; &nbsp; &nbsp;
+                            V5
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/201712250188/69671596f47d00853d23848ed34bc278/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            WE
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            style="float:left;width: 100%;height: 14%;background-image: url(box1.png);background-size: 100%;">
+                        </span>
+                        <span class="sszx-top-up-span1">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20190523092402/2810b9519c64ef7cbcdb9a6cb981798d/0"
+                                width="70px">
+                            苏州LNG
+                        </span>
+                        <span class="sszx-top-up-span2">
+                            <img src="https://img.crawler.qq.com/lolwebvideo/20211201183732/9d8f5bd780c2c16e32fefd0d63cfc3b7/0"
+                                width="70px">
+                            &nbsp; &nbsp; &nbsp;
+                            TES
+                        </span>
+                        <span class="sszx-top-up-span3">
+                            0:0
+                        </span>
+                        <span class="sszx-top-up-span4">
+                            敬请期待
+                        </span>
+                        <span class="sszx-top-up-span5">
+                            2022职业联赛
+                            <p>夏季赛常规赛 第三周 BO3</p>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-left"></div>
+            <div class="btn-right"></div>
+        </div>
+        <div class="sszx-bottom">
+            <div class="sszx-bottom-left">
+                <p>每周最佳阵容</p>
+                <ul style="list-style:none ;float: left;width: 100%;height: 250px;">
+                    <li>
+                        <div><br><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20220107191730/2afc237a4a93050b4045c4876d16ee11/0"
+                                width="100%" class="div-img1"><span class="div-img2"></span><span
+                                class="div-img3"></span></div>
+                        369
+                    </li>
+                    <li>
+                        <div><br><img
+                                src="	https://img.crawler.qq.com/lolwebvideo/20220107191620/c3e090f82e68f713559a383898322026/0"
+                                width="100%" class="div-img1"><span class="div-img2"
+                                style="background-position: 0 0;"></span><span class="div-img3"></span></div>
+                        Kanavi
+                    </li>
+                    <li>
+                        <div><br><img
+                                src="	https://img.crawler.qq.com/lolwebvideo/20220107193237/597e6fc222db62f89e3bc2e1686eaf32/0"
+                                width="100%" class="div-img1"><span class="div-img2"
+                                style="background-position: -23px -27px;"></span><span class="div-img3"
+                                style="background-image:url(	https://img.crawler.qq.com/lolwebvideo/20190523092402/2810b9519c64ef7cbcdb9a6cb981798d/0) ;"></span>
+                        </div>
+                        Doinb
+                    </li>
+                    <li>
+                        <div><br><img
+                                src="	https://img.crawler.qq.com/lolwebvideo/20220113104833/99a74bfdfb6950418b43ec23bd246bab/0"
+                                width="100%" class="div-img1"><span class="div-img2"
+                                style="background-position: 0 -27px;"></span><span class="div-img3"></span></div>
+                        Hope
+                    </li>
+                    <li>
+                        <div><br><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20220613175112/55342f2e627b1eb0508e7112461400aa/0"
+                                width="100%" class="div-img1"><span class="div-img2"
+                                style="background-position: -25px 0; width: 22px;"></span><span class="div-img3"
+                                style="background-image:url(https://img.crawler.qq.com/lolwebvideo/20220113105125/346f1ca70c2186e817f3f8289738c675/0);width: 25px;;"></span>
+                        </div>
+                        ON
+                    </li>
+                </ul>
+            </div>
+            <div class="sszx-bottom-right">
+                <p>积分榜</p>
+                <div class="sszx-bottom-right-div"><span style="float:left;margin-left: 10px;">排名</span><span
+                        style="float:left;margin-left: 80px;">俱乐部</span><span
+                        style="float:left;margin-left: 150px;">胜负</span><span
+                        style="float:left;margin-left:100px;">积分</span></div>
+                <ul style="list-style: none;">
+                    <li><span class="sszx-bottom-rightspan1">1</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+
+                    <li><span class="sszx-bottom-rightspan1">2</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20181224214105/448aac8501e04a27db7594cb1f441c17/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">深圳V5</span><span
+                            class="sszx-bottom-rightspan3">&nbsp;&nbsp;3/0</span><span class="sszx-bottom-rightspan4">3</span></li>
+
+                    <li><span class="sszx-bottom-rightspan1">3</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20190523092402/2810b9519c64ef7cbcdb9a6cb981798d/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">LNG</span><span
+                            class="sszx-bottom-rightspan3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3/0</span><span class="sszx-bottom-rightspan4">3</span></li>
+
+                    <li><span class="sszx-bottom-rightspan1">4</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20211201183732/9d8f5bd780c2c16e32fefd0d63cfc3b7/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">TES</span><span
+                            class="sszx-bottom-rightspan3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3/1</span><span class="sszx-bottom-rightspan4">3</span></li>
+
+                    <li><span class="sszx-bottom-rightspan1">5</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                    <li><span class="sszx-bottom-rightspan1">6</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                    <li><span class="sszx-bottom-rightspan1">7</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                    <li><span class="sszx-bottom-rightspan1">8</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                    <li><span class="sszx-bottom-rightspan1">9</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                    <li><span class="sszx-bottom-rightspan1">10</span><span class="sszx-bottom-rightspan2"><img
+                                src="https://img.crawler.qq.com/lolwebvideo/20210524154625/5856bdab95962f5ac864d284adf6097e/0"
+                                width="44px" alt=""></span><span class="sszx-bottom-rightspan5">北京JDG</span><span
+                            class="sszx-bottom-rightspan3">4/0</span><span class="sszx-bottom-rightspan4">4</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 赛事中心结束 -->
+
+    <!-- style="background-image:url(https://shp.qpic.cn/cms_pic/2490414818/a31fc43455d89a79742b058250e608c2/258);background-size: 100%;" -->
+
+    <!-- 创作馆 -->
+    <div class="czg">
+        <div class="czg-left">
+            <p style="float:left;">FANRAT创作馆 <span
+                    style="float:right;padding-right: 35px;color: rgb(17, 121, 150);font-size: 15px;">更多→</span></p>
+            <div>
+                <img src="https://shp.qpic.cn/cms_pic/2490414818/a31fc43455d89a79742b058250e608c2/258" width="100%">
+            </div>
+            <div>
+                <img src="https://shp.qpic.cn/cms_pic/2451053586/70a3eb3dad21cf7fc0edf3935c43ca80/258" width="100%">
+            </div>
+            <div>
+                <img src="https://shp.qpic.cn/cms_pic/2600999726/949e40bf2e3bb105fa3df84a32f6ac95/258" width="100%">
+            </div>
+            <div>
+                <img src="https://shp.qpic.cn/cms_pic/2490765977/b33737e56eb45ddaa26695facd2b9f8b/258" width="100%">
+            </div>
+            <div
+                style="background-image:url(https://shp.qpic.cn/cms_pic/2461163838/2d5155336e7405a6e62abd98a850a808/258);background-size: 100%;">
+                <img src="https://shp.qpic.cn/cms_pic/2461163838/2d5155336e7405a6e62abd98a850a808/258" width="100%">
+            </div>
+            <div
+                style="background-image:url(https://shp.qpic.cn/cms_pic/2460155447/7f1c6f5d81d4e12e72028e9da58f2c45/258);background-size: 100%;">
+                <img src="https://shp.qpic.cn/cms_pic/2460155447/7f1c6f5d81d4e12e72028e9da58f2c45/258" width="100%">
+            </div>
+            <div
+                style="background-image:url(https://shp.qpic.cn/cms_pic/2560610887/7510f9710eeca70c1a5fefb5f45651f2/258);background-size: 100%;">
+                <img src="https://shp.qpic.cn/cms_pic/2560610887/7510f9710eeca70c1a5fefb5f45651f2/258" width="100%">
+            </div>
+            <div
+                style="background-image:url(https://shp.qpic.cn/cms_pic/2680029253/d585e691fefa784af1fe16c3ee741417/258);background-size: 100%;">
+                <img src="https://shp.qpic.cn/cms_pic/2680029253/d585e691fefa784af1fe16c3ee741417/258" width="100%">
+            </div>
+        </div>
+        <div class="czg-right">
+            <div class="czg-right-div1"></div>
+            <div class=czg-right-div2
+                style="background-image:url(https://ossweb-img.qq.com/images/lol/v3/href-bg-2.jpg); background-size: cover;">
+                <i class="fa fa-eercast fa-lg"
+                    style="color: white;float: left;margin-top: 42px;margin-left: 20px;font-size:18px ;">
+                    &nbsp;英雄联盟用户调查</i>
+            </div>
+            <div class=czg-right-div2
+                style="background-image:url(https://ossweb-img.qq.com/images/lol/v3/href-bg-3.jpg); background-size: cover;">
+                <i class="fa fa-eercast fa-lg"
+                    style="color: white;float: left;margin-top: 42px;margin-left: 20px;font-size:18px"> &nbsp;见证历史版本</i>
+            </div>
+            <div class=czg-right-div2
+                style="background-image:url(https://ossweb-img.qq.com/images/lol/v3/href-bg-4.jpg); background-size: cover;">
+                <i class="fa fa-eercast fa-lg"
+                    style="color: white;float: left;margin-top: 42px;margin-left: 20px;font-size:18px"> &nbsp;年度品牌展示</i>
+            </div>
+            <div class=czg-right-div3>
+            </div>
+        </div>
+    </div>
+
+    <div class="lastfoot">
+        <div class="lastfoot-left">
+            <span class="lastfoot-left-span1"></span>
+            <span class="lastfoot-left-span2"></span>
+        </div>
+        <ul class="lastfoot-ul">
+            <li>腾讯互动娱乐|服务条款|隐私保护指引|儿童隐私保护指引|腾讯游戏招聘|腾讯游戏客服|游戏列表|广告服务及商务合作</li>
+            <li>腾讯公司版权所有网络游戏行业防沉迷自律公约</li>
+            <li>COPYRIGHT © 1998 - 2022 TENCENT. ALL RIGHTS RESERVED.</li>
+            <li>COPYRIGHT © 2012 Riot Games,Inc. ALL RIGHTS RESERVED.</li>
+            <li>本网络游戏适合16+岁的用户使用；为了您的健康，请合理控制游戏时间。</li>
+            <li>工商网监电子标识 |粤网文[2020]3396-195号|（署）网出证（粤）字第054号</li>
+            <li>批准文号：新出审字[2011]310号 |文网进字[2011] 004号 | 出版物号：ISBN 978-7-89989-145-2|全国文化市场统一举报电话：12318</li>
+        </ul>
+    </div>
+    <!-- 右侧固定模块 -->
+    <div class="rightnav-barshow">
+        <ul style="list-style:none ;">
+            <li><span style="background-position: -216px -99px;"></span>
+                <p>热门活动</p>
+            </li>
+            <li><span style="background-position: -262px -99px;"></span>
+                <p>视频中心</p>
+            </li>
+            <li><span style="background-position: -220px -46px;width: 22PX;"></span>
+                <p>赛事中心</p>
+            </li>
+            <li><span style="background-position: -269px -72px;width: 22PX"></span>
+                <p>英雄资料</p>
+            </li>
+            <li><span style="background-position: -287px -12px;width: 25PX"></span>
+                <P>FANRAT</P>
+            </li>
+            <li><span style="margin-top: 0px;"><img src="https://ossweb-img.qq.com/images/lol/v3/polo.gif"
+                        width="130%"></span>
+                <p>&nbsp;&nbsp;&nbsp;顶部</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 热门活动 -->
+
+
+</body>
+
+</html>
